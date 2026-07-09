@@ -1,5 +1,4 @@
-@page "/event/{EventId:int}"
-@page "/event/delete/{EventId:int}"
+@page "/event/details/{EventId:int}"
 @using NOTESPACK.Models
 @using NOTESPACK.Data
 @using Microsoft.EntityFrameworkCore
@@ -29,14 +28,6 @@
             }
             else
             {
-                @if (Navigation.Uri.Contains("delete"))
-                {
-                    <div class="alert alert-danger shadow-sm border-0 bg-opacity-25 mb-4" role="alert">
-                        <h4 class="alert-heading text-danger fw-bold">Warning!</h4>
-                        <p class="mb-0 text-white">Are you sure you want to permanently delete this event? This action cannot be undone.</p>
-                    </div>
-                }
-
                 <div class="event-preview-details text-white mb-4">
                     <div class="mb-3">
                         <strong class="text-white-50">Title:</strong> 
@@ -57,18 +48,9 @@
                 </div>
 
                 <div class="form-actions mt-4">
-                    @if (Navigation.Uri.Contains("delete"))
-                    {
-                        <button type="button" class="btn-submit btn-danger bg-danger border-0" @onclick="ConfirmDelete">
-                            Yes, Delete
-                        </button>
-                    }
-                    else
-                    {
                         <NavLink href="@($"event/edit/{EventModel.Id}")" class="btn-submit text-decoration-none text-center bg-warning border-0">
                             Edit Event
                         </NavLink>
-                    }
                     <NavLink href="my-events" class="btn-cancel text-decoration-none text-center">
                         Back to List
                     </NavLink>
@@ -85,15 +67,5 @@
     protected override async Task OnInitializedAsync()
     {
         EventModel = await Context.Events.FirstOrDefaultAsync(e => e.Id == EventId);
-    }
-
-    private async Task ConfirmDelete()
-    {
-        if (EventModel == null) return;
-
-        Context.Events.Remove(EventModel);
-        await Context.SaveChangesAsync();
-        
-        Navigation.NavigateTo("my-events");
     }
 }

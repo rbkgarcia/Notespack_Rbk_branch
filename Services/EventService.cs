@@ -17,7 +17,7 @@ namespace NOTESPACK.Services
         {
             using var context = _contextFactory.CreateDbContext();
             return await context.Events
-                .Where(e => e.UserId == userId || e.UserId == 0)
+                .Where(e => e.UserId == userId)
                 .OrderBy(e => e.Date)
                 .ToListAsync();
         }

@@ -8,6 +8,53 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager Navigation
 
+<div class="edit-event-page">
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Edit Event</h1>
+        </div>
+
+        @if (EventModel == null)
+        {
+            <p>Loading event details...</p>
+        }
+        else
+        {
+            <div class="glass-card form-container">
+                <EditForm Model="EventModel" OnValidSubmit="HandleSave">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="form-group">
+                        <label>Title</label>
+                        <InputText @bind-Value="EventModel.Title" class="form-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <InputTextArea @bind-Value="EventModel.Description" class="form-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        <InputDate @bind-Value="EventModel.Date" class="form-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <InputText @bind-Value="EventModel.Location" class="form-input" />
+                    </div>
+
+                    <div class="form-actions mt-4">
+                        <button type="submit" class="btn-submit">Save Changes</button>
+                        <NavLink href="my-events" class="btn-cancel">Cancel</NavLink>
+                    </div>
+                </EditForm>
+            </div>
+        }
+    </div>
+</div>
+
 @code 
 {
     [Parameter] public int EventId { get; set; }
@@ -15,19 +62,20 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // 1. Cargamos el usuario para validar la propiedad del evento
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
         var userIdString = authState.User.FindFirst("UserId")?.Value;
 
         if (int.TryParse(userIdString, out int userId))
         {
-            // 2. Cargamos el evento solo si pertenece al usuario
-            // Nota: Podrías agregar un método GetEventByIdAsync(id, userId) en tu Service
-            // Por ahora, si quieres mantenerlo simple, aseguramos la carga aquí:
+            // Cargamos todos los eventos y buscamos el específico por ID
             var events = await EventService.GetEventsByUserIdAsync(userId);
             EventModel = events.FirstOrDefault(e => e.Id == EventId);
             
-            if (EventModel == null) Navigation.NavigateTo("/my-events");
+            if (EventModel == null) 
+            {
+                // Si el evento no existe o no pertenece al usuario, regresamos a la lista
+                Navigation.NavigateTo("/my-events");
+            }
         }
         else
         {
@@ -44,8 +92,11 @@
 
         if (int.TryParse(userIdString, out int userId))
         {
+            // Llamamos a tu servicio para actualizar en BD[cite: 11]
             await EventService.UpdateEventAsync(EventModel, userId);
-            Navigation.NavigateTo("my-events");
+            
+            // Regresamos a la lista después de guardar
+            Navigation.NavigateTo("/my-events");
         }
     }
 }

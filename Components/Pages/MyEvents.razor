@@ -2,58 +2,110 @@
 @using NOTESPACK.Models
 @using NOTESPACK.Services
 @using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@rendermode InteractiveServer
+@inject IDbContextFactory<NOTESPACK.Data.EventContext> DbFactory
 @inject EventService EventService
 @inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager Navigation
 
+<PageTitle>My Events · Notespack</PageTitle>
+
 <section class="events-section">
     <div class="container-x">
-        <div class="events-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-            <h2>My Personal Events</h2>
-            @* Botón siempre visible para Crear *@
-            <a href="/create-event" class="btn-primary" style="padding: 10px 20px; background: #fff; color: #000; border-radius: 20px; text-decoration: none; font-weight: bold;">
+        <div class="events-header" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <span class="eyebrow" style="color: #aaa; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Your Schedule</span>
+                <h2>Personal & Campus Events</h2>
+            </div>
+            @* BOTÓN DE CREAR EVENTO *@
+            <a href="/event/create" class="btn-primary" style="padding: 10px 20px; background: #7B5EFF; color: white; border-radius: 8px; text-decoration: none; font-weight: bold;">
                 + Create New Event
             </a>
         </div>
 
-        <div class="grid-3 event-grid">
-            @foreach (var item in MyPersonalEvents)
-            {
-                <div class="glass-card">
-                    <h3>@item.Title</h3>
-                    <p>@item.Description</p>
+        @if (AllEvents == null) {
+            <div class="loading-state" style="text-align: center; padding: 3rem;"><p>Loading your events...</p></div>
+        }
+        else if (!AllEvents.Any()) {
+            <div class="glass-card" style="text-align: center; padding: 3rem;">
+                <h3>All clear!</h3>
+                <p>You don't have any events scheduled yet. It's a great time to plan something!</p>
+            </div>
+        }
+        else {
+            <div class="grid-3 event-grid">
+                @foreach (var item in AllEvents) {
+                    bool isCampus = item.UserId == 0;
                     
-                    <div class="actions" style="margin-top: 15px;">
-                        @* Navegación a las vistas que ya tienes *@
-                        <a href="/edit-event/@item.Id" class="btn-edit">Edit</a>
-                        
-                        <button class="btn-delete" @onclick="() => DeleteEvent(item.Id)" style="color: red; background: none; border: none; cursor: pointer;">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            }
-        </div>
+                    <article class="glass-card event-card @(isCampus ? "border-blue" : "border-orange")" style="position: relative;">
+                        @* BOTÓN DE BORRAR (Solo si es personal, es decir, UserId != 0) *@
+                        @if (!isCampus)
+                        {
+                            <button @onclick="() => ConfirmDelete(item.Id)"
+                                    style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; color: #ff5e5e; z-index: 10;" 
+                                    title="Delete Event">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        }
+
+                        <div class="event-date-badge">
+                            <span class="d">@item.Date.ToString("dd")</span>
+                            <span class="m">@item.Date.ToString("MMM")</span>
+                        </div>
+                        <div class="event-body-content">
+                            <h3>
+                                @item.Title
+                                <span class="badge" style="font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: @(isCampus ? "#1976d2" : "#f57c00"); color: white;">
+                                    @(isCampus ? "CAMPUS" : "PERSONAL")
+                                </span>
+                            </h3>
+                            <p class="card-desc-text">@item.Description</p>
+                            <p class="card-loc-text" style="font-size: 0.9rem; opacity: 0.8;">
+                                <span class="pin">◉</span> @(item.Location ?? "No location provided")
+                            </p>
+                            
+                            <a href="/event/details/@item.Id" class="btn-edit-full" style="margin-top: 15px; display: block; text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; color: white; text-decoration: none;">
+                                View Details
+                            </a>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
     </div>
 </section>
 
 @code {
-    private List<Event> MyPersonalEvents = new();
+    private List<Event>? AllEvents { get; set; }
+        protected override async Task OnInitializedAsync()
+    {
+        await LoadEvents();
+    }
 
-    protected override async Task OnInitializedAsync() => await LoadEvents();
-
-    private async Task LoadEvents() {
+    protected async Task LoadEvents()
+    {
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
         var userIdString = authState.User.FindFirst("UserId")?.Value;
-        if (int.TryParse(userIdString, out int userId)) {
-            var all = await EventService.GetEventsByUserIdAsync(userId);
-            MyPersonalEvents = all.Where(e => e.UserId == userId).ToList();
+
+        if (int.TryParse(userIdString, out int userId))
+        {
+            AllEvents = await EventService.GetEventsByUserIdAsync(userId);
+            StateHasChanged();
+        }
+        else
+        {
+            AllEvents = new List<Event>();
         }
     }
 
-    private async Task DeleteEvent(int id) {
-        // Implementación rápida de borrado
-        await EventService.DeleteAsync(id); 
-        await LoadEvents(); // Recarga la lista automáticamente
+    // Método de navegación para el borrado
+    private void ConfirmDelete(int id) 
+    {
+        Console.WriteLine($"DEBUG: Intentando borrar evento ID: {id}");
+        Navigation.NavigateTo($"/event/delete/{id}");
     }
 }

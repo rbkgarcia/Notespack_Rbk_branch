@@ -1,14 +1,13 @@
 @page "/event/create"
 @using NOTESPACK.Models
-@using NOTESPACK.Data
-@using Microsoft.EntityFrameworkCore
-@using Microsoft.AspNetCore.Components.Authorization
 @using NOTESPACK.Services
+@using Microsoft.AspNetCore.Components.Authorization
 @inject EventService EventService
 @inject AuthenticationStateProvider AuthStateProvider
-@rendermode InteractiveServer
-@inject EventContext Context
 @inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+
 
 <div class="create-event-page">
     <div class="cursor-glow" id="cursorGlow"></div>
@@ -62,14 +61,20 @@
 
     private async Task HandleCreate()
 {
-    // Tu lógica de autenticación y guardado
+    Console.WriteLine("DEBUG: Botón presionado, iniciando HandleCreate...");
     var authState = await AuthStateProvider.GetAuthenticationStateAsync();
     var userIdString = authState.User.FindFirst("UserId")?.Value;
 
     if (int.TryParse(userIdString, out int userId))
     {
+        Console.WriteLine($"DEBUG: Usuario identificado: {userId}. Guardando...");
         await EventService.AddEventAsync(NewEvent, userId);
+        Console.WriteLine("DEBUG: Evento guardado exitosamente.");
         Navigation.NavigateTo("my-events");
+    }
+    else
+    {
+        Console.WriteLine("DEBUG ERROR: No se pudo obtener el UserId del usuario.");
     }
 }
 }
