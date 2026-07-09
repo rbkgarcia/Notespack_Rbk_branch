@@ -1,20 +1,53 @@
 @page "/login"
 @rendermode InteractiveServer
+@using NOTESPACK.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthStateProvider
+@inject AuthService AuthService
+@inject NavigationManager Navigation
+@inject CustomAuthenticationStateProvider CustomAuthStateProvider
 
 <div class="login-container">
     <div class="glass-card">
-        <h2>Login</h2>
-        <form action="/Account/Login" method="post">
-            <AntiforgeryToken />
+        <h2>Welcome Back</h2>
+        <form @onsubmit="HandleLogin">
             <div class="form-group">
-                <label>Email</label>
-                <input name="email" type="email" class="glass-input" required />
+                <label>University Email</label>
+                <input type="email" @bind="email" class="glass-input" required />
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 15px;">
                 <label>Password</label>
-                <input name="password" type="password" class="glass-input" required />
+                <input type="@(showPassword ? "text" : "password")" @bind="password" class="glass-input" required />
+                <button type="button" @onclick="TogglePassword">@(showPassword ? "Hide" : "Show")</button>
             </div>
-            <button type="submit" class="btn-pill">Login</button>
+            <button type="submit" class="btn-pill" style="width: 100%; margin-top: 20px;">Sign In</button>
         </form>
+        @if (!string.IsNullOrEmpty(errorMessage)) { <p style="color:red">@errorMessage</p> }
     </div>
 </div>
+
+@code {
+    private string email;
+    private string password;
+    private string errorMessage;
+    private bool showPassword = false;
+
+    private void TogglePassword() => showPassword = !showPassword;
+
+    private async Task HandleLogin()
+    {
+        var user = await AuthService.LoginAsync(email, password);
+        if (user != null)
+        {
+            // Aquí hacemos el cast seguro a tu clase personalizada
+            var customProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
+            customProvider.MarkUserAsAuthenticated(user.Id, user.Email);
+            
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            errorMessage = "Credenciales incorrectas.";
+        }
+    }
+}

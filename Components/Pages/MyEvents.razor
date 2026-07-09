@@ -2,57 +2,58 @@
 @using NOTESPACK.Models
 @using NOTESPACK.Services
 @using Microsoft.AspNetCore.Components.Authorization
-@rendermode InteractiveServer
-
 @inject EventService EventService
 @inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager Navigation
 
-<PageTitle>My Events · Notespack</PageTitle>
+<section class="events-section">
+    <div class="container-x">
+        <div class="events-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2>My Personal Events</h2>
+            @* Botón siempre visible para Crear *@
+            <a href="/create-event" class="btn-primary" style="padding: 10px 20px; background: #fff; color: #000; border-radius: 20px; text-decoration: none; font-weight: bold;">
+                + Create New Event
+            </a>
+        </div>
 
-<AuthorizeView>
-    <Authorized>
-        <section class="events-section">
-            @if (MyPersonalEvents == null) { <p>Loading...</p> }
-            else {
-                @foreach (var item in MyPersonalEvents) {
-                    <div class="event-card">
-                        <h3>@item.Title @(item.UserId == 0 ? "(Campus)" : "")</h3>
-                        </div>
-                }
+        <div class="grid-3 event-grid">
+            @foreach (var item in MyPersonalEvents)
+            {
+                <div class="glass-card">
+                    <h3>@item.Title</h3>
+                    <p>@item.Description</p>
+                    
+                    <div class="actions" style="margin-top: 15px;">
+                        @* Navegación a las vistas que ya tienes *@
+                        <a href="/edit-event/@item.Id" class="btn-edit">Edit</a>
+                        
+                        <button class="btn-delete" @onclick="() => DeleteEvent(item.Id)" style="color: red; background: none; border: none; cursor: pointer;">
+                            Delete
+                        </button>
+                    </div>
+                </div>
             }
-        </section>
-    </Authorized>
-    <NotAuthorized>
-        <p>Por favor, <a href="/login">inicia sesión</a> para ver tus eventos.</p>
-    </NotAuthorized>
-</AuthorizeView>
+        </div>
+    </div>
+</section>
 
-@code 
-{
-    private List<Event>? MyPersonalEvents { get; set; }
+@code {
+    private List<Event> MyPersonalEvents = new();
 
-    protected override async Task OnInitializedAsync()
-{
-    var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-    var user = authState.User;
-    var userIdString = user.FindFirst("UserId")?.Value;
+    protected override async Task OnInitializedAsync() => await LoadEvents();
 
-    // Log para depurar en consola
-    Console.WriteLine($"DEBUG: Usuario autenticado: {user.Identity?.Name}");
-    Console.WriteLine($"DEBUG: UserId encontrado: {userIdString}");
-
-    if (int.TryParse(userIdString, out int userId))
-    {
-        MyPersonalEvents = await EventService.GetEventsByUserIdAsync(userId);
-        Console.WriteLine($"DEBUG: Eventos obtenidos de la BD: {MyPersonalEvents?.Count ?? 0}");
-    }
-    else
-    {
-        Console.WriteLine("DEBUG: El UserId no es un número válido o no existe.");
-        MyPersonalEvents = new List<Event>(); // Inicializamos para quitar el "Loading..."
+    private async Task LoadEvents() {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var userIdString = authState.User.FindFirst("UserId")?.Value;
+        if (int.TryParse(userIdString, out int userId)) {
+            var all = await EventService.GetEventsByUserIdAsync(userId);
+            MyPersonalEvents = all.Where(e => e.UserId == userId).ToList();
+        }
     }
 
-    StateHasChanged();
+    private async Task DeleteEvent(int id) {
+        // Implementación rápida de borrado
+        await EventService.DeleteAsync(id); 
+        await LoadEvents(); // Recarga la lista automáticamente
     }
 }
