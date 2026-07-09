@@ -1,0 +1,58 @@
+@page "/my-events"
+@using NOTESPACK.Models
+@using NOTESPACK.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@rendermode InteractiveServer
+
+@inject EventService EventService
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+
+<PageTitle>My Events · Notespack</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <section class="events-section">
+            @if (MyPersonalEvents == null) { <p>Loading...</p> }
+            else {
+                @foreach (var item in MyPersonalEvents) {
+                    <div class="event-card">
+                        <h3>@item.Title @(item.UserId == 0 ? "(Campus)" : "")</h3>
+                        </div>
+                }
+            }
+        </section>
+    </Authorized>
+    <NotAuthorized>
+        <p>Por favor, <a href="/login">inicia sesión</a> para ver tus eventos.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code 
+{
+    private List<Event>? MyPersonalEvents { get; set; }
+
+    protected override async Task OnInitializedAsync()
+{
+    var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+    var user = authState.User;
+    var userIdString = user.FindFirst("UserId")?.Value;
+
+    // Log para depurar en consola
+    Console.WriteLine($"DEBUG: Usuario autenticado: {user.Identity?.Name}");
+    Console.WriteLine($"DEBUG: UserId encontrado: {userIdString}");
+
+    if (int.TryParse(userIdString, out int userId))
+    {
+        MyPersonalEvents = await EventService.GetEventsByUserIdAsync(userId);
+        Console.WriteLine($"DEBUG: Eventos obtenidos de la BD: {MyPersonalEvents?.Count ?? 0}");
+    }
+    else
+    {
+        Console.WriteLine("DEBUG: El UserId no es un número válido o no existe.");
+        MyPersonalEvents = new List<Event>(); // Inicializamos para quitar el "Loading..."
+    }
+
+    StateHasChanged();
+    }
+}

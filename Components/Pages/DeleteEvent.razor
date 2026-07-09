@@ -1,0 +1,57 @@
+@page "/events/delete/{Id:int}"
+@using NOTESPACK.Models
+@using NOTESPACK.Data
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<EventContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<h3>Delete Event</h3>
+
+@if (eventToDelete == null)
+{
+    <p><em>Loading event...</em></p>
+}
+else
+{
+    <div class="alert alert-danger">
+        <h5>Are you sure you want to delete this event?</h5>
+        <p><strong>Title:</strong> @eventToDelete.Title</p>
+        <p><strong>Description:</strong> @eventToDelete.Description</p>
+    </div>
+
+    <button class="btn btn-danger" @onclick="ConfirmDelete">Yes, Delete</button>
+    <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Event? eventToDelete;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = await DbFactory.CreateDbContextAsync();
+        eventToDelete = await context.Events.FindAsync(Id);
+
+        if (eventToDelete == null)
+        {
+            NavigationManager.NavigateTo("/my-events");
+        }
+    }
+
+    private async Task ConfirmDelete()
+    {
+        if (eventToDelete == null) return;
+
+        using var context = await DbFactory.CreateDbContextAsync();
+        context.Events.Remove(eventToDelete);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/my-events");
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/my-events");
+    }
+}

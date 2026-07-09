@@ -1,0 +1,75 @@
+@page "/event/create"
+@using NOTESPACK.Models
+@using NOTESPACK.Data
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.Authorization
+@using NOTESPACK.Services
+@inject EventService EventService
+@inject AuthenticationStateProvider AuthStateProvider
+@rendermode InteractiveServer
+@inject EventContext Context
+@inject NavigationManager Navigation
+
+<div class="create-event-page">
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Create New Event</h1>
+        </div>
+
+        <div class="glass-card form-container tilt-card">
+            <EditForm Model="NewEvent" OnValidSubmit="HandleCreate">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger mb-3" />
+
+                <div class="form-group">
+                    <label class="form-label" for="eventTitle">Event Title</label>
+                    <InputText id="eventTitle" @bind-Value="NewEvent.Title" class="form-input" placeholder="Enter event title" />
+                    <ValidationMessage For="() => NewEvent.Title" class="text-danger-glow" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="eventDescription">Description</label>
+                    <InputTextArea id="eventDescription" @bind-Value="NewEvent.Description" class="form-input" placeholder="Enter description" />
+                    <ValidationMessage For="() => NewEvent.Description" class="text-danger-glow" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="eventDate">Date</label>
+                    <InputDate id="eventDate" @bind-Value="NewEvent.Date" class="form-input" />
+                    <ValidationMessage For="() => NewEvent.Date" class="text-danger-glow" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="eventLocation">Location</label>
+                    <InputText id="eventLocation" @bind-Value="NewEvent.Location" class="form-input" placeholder="Enter location" />
+                    <ValidationMessage For="() => NewEvent.Location" class="text-danger-glow" />
+                </div>
+
+                <div class="form-actions mt-4">
+                    <button type="submit" class="btn-submit">Save Event</button>
+                    <NavLink href="my-events" class="btn-cancel text-decoration-none text-center">Cancel</NavLink>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code 
+{
+    private Event NewEvent { get; set; } = new();
+
+    private async Task HandleCreate()
+{
+    // Tu lógica de autenticación y guardado
+    var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+    var userIdString = authState.User.FindFirst("UserId")?.Value;
+
+    if (int.TryParse(userIdString, out int userId))
+    {
+        await EventService.AddEventAsync(NewEvent, userId);
+        Navigation.NavigateTo("my-events");
+    }
+}
+}

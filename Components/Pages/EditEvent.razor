@@ -1,0 +1,51 @@
+@page "/event/edit/{EventId:int}"
+@using NOTESPACK.Models
+@using NOTESPACK.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@rendermode InteractiveServer
+
+@inject EventService EventService
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+
+@code 
+{
+    [Parameter] public int EventId { get; set; }
+    private Event? EventModel { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // 1. Cargamos el usuario para validar la propiedad del evento
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var userIdString = authState.User.FindFirst("UserId")?.Value;
+
+        if (int.TryParse(userIdString, out int userId))
+        {
+            // 2. Cargamos el evento solo si pertenece al usuario
+            // Nota: Podrías agregar un método GetEventByIdAsync(id, userId) en tu Service
+            // Por ahora, si quieres mantenerlo simple, aseguramos la carga aquí:
+            var events = await EventService.GetEventsByUserIdAsync(userId);
+            EventModel = events.FirstOrDefault(e => e.Id == EventId);
+            
+            if (EventModel == null) Navigation.NavigateTo("/my-events");
+        }
+        else
+        {
+            Navigation.NavigateTo("/login");
+        }
+    }
+
+    private async Task HandleSave()
+    {
+        if (EventModel == null) return;
+
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var userIdString = authState.User.FindFirst("UserId")?.Value;
+
+        if (int.TryParse(userIdString, out int userId))
+        {
+            await EventService.UpdateEventAsync(EventModel, userId);
+            Navigation.NavigateTo("my-events");
+        }
+    }
+}
