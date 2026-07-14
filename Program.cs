@@ -46,26 +46,33 @@ app.MapPost("/Account/Login", async (HttpContext context, AuthService authServic
     var form = await context.Request.ReadFormAsync();
     var email = form["email"].ToString() ?? "";
     var password = form["password"].ToString() ?? "";
-    
-    var user = await authService.LoginAsync(email, password);
-    
-    if (user != null)
-    {
-        // Aseguramos que el Id se convierta a string de forma segura
-        var userId = user.Id.ToString(); 
 
-        var claims = new List<Claim> { 
-            new Claim(ClaimTypes.Name, user.Email), 
+    var result = await authService.LoginAsync(email, password);
+
+    if (result.Status == AuthLoginStatus.Success)
+    {
+        var user = result.User!;
+        var userId = user.Id.ToString();
+
+        var claims = new List<Claim> {
+            new Claim(ClaimTypes.Name, user.Email),
             new Claim(ClaimTypes.Role, user.Role),
-            new Claim("UserId", userId) // Ahora pasamos el ID real
+            new Claim("UserId", userId)
         };
 
-        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, 
+        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
-        
+
         context.Response.Redirect("/");
     }
-    else { context.Response.Redirect("/login?error=true"); }
+    else if (result.Status == AuthLoginStatus.EmailNotFound)
+    {
+        context.Response.Redirect("/login?error=email_not_found");
+    }
+    else // WrongPassword
+    {
+        context.Response.Redirect("/login?error=wrong_password");
+    }
 });
 
 app.MapPost("/Account/Logout", async (HttpContext context) =>

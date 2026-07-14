@@ -1,3 +1,4 @@
+
 .page {
     position: relative;
     display: flex;
@@ -68,6 +69,45 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+
+/** LOGIN FORM DESIGN **/
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper .glass-input {
+    width: 100%;
+    padding-right: 40px; /* espacio para el ícono */
+}
+
+.eye-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #666; /* ajusta al tono de tu glass-card */
+    padding: 0;
+}
+
+.eye-toggle:hover {
+    color: #333;
+}
+
+.login-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+}
+/* Typography */
+
 
 a { color: inherit; text-decoration: none; }
 
@@ -793,14 +833,7 @@ button:focus-visible {
 /* Smoother section rhythm */
 .section { scroll-margin-top: 80px; }
 
-.login-container {
-    min-height: calc(100vh - 80px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    width: 100%;
-}
+
 /* Hero scales down cleanly on phones */
 @media (max-width: 720px) {
   .hero { padding-top: 56px; padding-bottom: 64px; }
