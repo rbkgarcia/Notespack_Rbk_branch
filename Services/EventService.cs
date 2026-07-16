@@ -41,7 +41,11 @@ namespace NOTESPACK.Services
                 existingEvent.Title = updatedEvent.Title;
                 existingEvent.Description = updatedEvent.Description;
                 existingEvent.Date = updatedEvent.Date;
+                existingEvent.EndDate = updatedEvent.EndDate;
                 existingEvent.Location = updatedEvent.Location;
+                existingEvent.Duration = updatedEvent.Duration;
+                existingEvent.Organizer = updatedEvent.Organizer;
+
                 await context.SaveChangesAsync();
             }
         }
