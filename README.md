@@ -163,10 +163,10 @@ Additional project documentation:
 - [x] UI design
 - [x] Database design
 - [x] User authentication
-- [ ] Event CRUD operations
-- [ ] Search and filtering
-- [ ] Responsive design
-- [ ] Accessibility improvements
+- [x] Event CRUD operations
+- [x] Search and filtering
+- [x] Responsive design
+- [x] Accessibility improvements
 - [ ] QA testing
 - [ ] Cloud deployment
 - [ ] Final project presentation

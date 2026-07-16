@@ -47,7 +47,7 @@ cd Notespack
 
 ## Step 2: Open the Project
 
-Open the solution file in Visual Studio.
+Open the solution file in Visual Studio or equivalent IDE.
 
 ---
 
@@ -139,7 +139,6 @@ When the application opens, users can:
 1. Navigate to the Register page.
 2. Enter:
 
-    * Username
     * Email
     * Password
 3. Submit the form.
