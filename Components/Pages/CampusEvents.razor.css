@@ -1,0 +1,23 @@
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.card-desc-text {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    margin-top: 0.5rem;
+}
+
+section.events-section {
+    padding: 2em;
+}
+
+.events-header {
+    margin: 0 0 1em 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
