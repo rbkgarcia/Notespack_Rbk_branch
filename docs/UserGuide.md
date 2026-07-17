@@ -1,12 +1,41 @@
-﻿# User Guide
+﻿# Notespack User Guide
 
-# The Syntax Errors - Notespack
+<!-- Table of Contents -->
+# Table of Contents
+
+- [Introduction](#introduction)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
+    * [Clone Repository](#step-1-clone-the-repository)
+    * [Open Project](#step-2-open-the-project)
+    * [Configure Database](#step-3-configure-the-database)
+    * [Database Migrations](#step-4-apply-database-migrations)
+    * [Build Project](#step-5-build-the-project)
+    * [Run Application](#step-6-run-the-application)
+- [Getting Started](#getting-started)
+- [Create an Account](#creating-an-account)
+- [Log In](#logging-in)
+- [Log Out](#logging-out)
+- [View Events](#viewing-events)
+- [Search for Events](#searching-for-events)
+- [Create Events](#creating-an-event)
+- [Edit Events](#editing-an-event)
+- [Delete Events](#deleting-an-event)
+- [Responsive Design](#responsive-design)
+    * [Desktop](#desktop)
+    * [Tablet](#tablet)
+    * [Mobile](#mobile)
+- [Accessibility](#accessibility-features)
+- [Common Issues](#common-issues)
+- [FAQ](#frequently-asked-questions)
+- [Best Practices](#best-practices)
+- [Support](#support)
+- [Version](#version-information)
+- [Revision History](#revision-history)
 
 ## Introduction
 
-Welcome to Notespack!
-
-This application was developed to help college students discover, create, and manage events in one organized location. Users can browse upcoming events, create their own events, edit existing events, and manage their accounts through a simple and responsive interface.
+Notespack is a Blazor-based event management application designed to help college students discover, create, and manage events in one organized location. Users can browse upcoming events, create their own events, edit existing events, and manage their accounts through a simple and responsive interface.
 
 ---
 
@@ -18,11 +47,8 @@ To run the application locally, ensure the following software is installed:
 
 * .NET 8 SDK
 * Visual Studio 2022 or later
-* SQL Server
-* SQL Server Management Studio (optional)
 * Git
 * Modern web browser:
-
     * Google Chrome
     * Microsoft Edge
     * Mozilla Firefox
@@ -47,40 +73,32 @@ cd Notespack
 
 ## Step 2: Open the Project
 
-Open the solution file in Visual Studio or equivalent IDE.
+Open the solution file (.sln) in Visual Studio or your preferred IDE.
 
 ---
 
 ## Step 3: Configure the Database
 
-Update the connection string in:
+Notespack uses SQLite, a lightweight file-based database. The database file is created automatically when the application starts. No SQL Server installation or config is required. If you want to change the database file name or location, update the connection string in:
 
 ```
-appsettings.json
+    appsettings.json
 ```
-
 Example:
-
-```json
-"ConnectionStrings": {
-    "DefaultConnection": "Your SQL Server Connection String"
-}
+```
+    "ConnectionStrings": {
+        "DefaultConnection": "Data Source=notespack.db"
+    }
 ```
 
 ---
 
 ## Step 4: Apply Database Migrations
 
-Open the Package Manager Console and run:
+Notespack does not require manual migrations. The database schema is created automatically at runtime using:
 
 ```powershell
-Update-Database
-```
-
-Alternatively:
-
-```bash
-dotnet ef database update
+Database.EnsureCreated()
 ```
 
 ---
@@ -188,12 +206,11 @@ Information displayed may include:
 * Event title
 * Description
 * Date
-* Time
-* Location
-* Category
-* Creator
-* RSVP count
-* Event image
+* Start Date
+* End Date
+* Event Duration
+* Address / Location
+* Organizer Name
 
 ---
 
@@ -215,18 +232,18 @@ Matching events will be displayed automatically.
 
 Authenticated users may create events.
 
-## Steps
-
 1. Navigate to Create Event.
 2. Fill in required information:
 
-    * Title
-    * Description
-    * Date
-    * Start Time
-    * End Time
-    * Location
-    * Category
+   * Event title
+   * Description
+   * Date
+   * Start Date
+   * End Date
+   * Event Duration
+   * Address / Location
+   * Organizer Name
+   
 3. Submit the form.
 
 The event will appear in the event listing after creation.
@@ -266,13 +283,27 @@ The website supports:
 
 Full functionality and navigation.
 
+<div>
+  <img src="docs/screenshots/NPDesktop.png" alt="Desktop Screenshot" width="400">
+</div>
+
+---
+
 ## Tablet
 
 Responsive layout adjustments.
+<div>
+  <img src="docs/screenshots/NPTablet.png" alt="Tablet Screenshot" width="300">
+</div>
+
+---
 
 ## Mobile
 
 Optimized interface for smaller screens.
+<div>
+  <img src="docs/screenshots/NPTablet.png" alt="Tablet Screenshot" width="300">
+</div>
 
 ---
 
@@ -393,7 +424,7 @@ If you encounter problems:
 
 **Framework:** .NET 8 Blazor
 
-**Database:** SQL Server
+**Database:** SQLite
 
 **Current Version:** 1.0
 

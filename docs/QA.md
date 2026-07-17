@@ -35,7 +35,7 @@ The project will be tested to ensure:
 * Visual Studio
 * .NET 8
 * Blazor
-* SQL Server
+* SQLite
 * Google Chrome
 * Microsoft Edge
 * Firefox
@@ -44,7 +44,6 @@ The project will be tested to ensure:
 
 * Lighthouse
 * Browser Developer Tools
-* SQL Server Management Studio
 * GitHub
 * Manual User Testing
 
