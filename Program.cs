@@ -16,7 +16,9 @@ builder.Services.AddDbContextFactory<EventContext>(options => options.UseSqlite(
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { 
         options.Cookie.HttpOnly = true; 
-        options.LoginPath = "/login"; 
+        options.LoginPath = "/login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(2); // luego cambiar a 15
+        options.SlidingExpiration = true; // cada petición renueva el conteo 
     });
 
 builder.Services.AddAuthorization();
@@ -79,6 +81,15 @@ app.MapPost("/Account/Logout", async (HttpContext context) =>
 {
     await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     context.Response.Redirect("/");
+});
+
+app.MapPost("/Account/InactivityLogout", async (HttpContext context) =>
+{
+    if (context.User?.Identity?.IsAuthenticated == true)
+    {
+        await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+    }
+    return Results.Ok();
 });
 
 app.MapRazorComponents<NOTESPACK.App>().AddInteractiveServerRenderMode();

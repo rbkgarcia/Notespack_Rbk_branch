@@ -61,5 +61,27 @@ namespace NOTESPACK.Services
 
             return new AuthLoginResult { Status = AuthLoginStatus.Success, User = user };
         }
+        private async Task<string> Var_GenerateUniqueUsernameAsync(EventContext context)
+        {
+            string Var_Candidato;
+            var Var_Intentos = 0;
+            const int Var_MaxIntentos = 20;
+
+            do
+            {
+                Var_Candidato = UsernameGenerator.Var_GenerateRandomUsername();
+                Var_Intentos++;
+            }
+            while (await context.Users.AnyAsync(u => u.username == Var_Candidato) && Var_Intentos < Var_MaxIntentos);
+
+            if (await context.Users.AnyAsync(u => u.username == Var_Candidato))
+            {
+                var Var_Sufijo = Guid.NewGuid().ToString("N")[..4];
+                Var_Candidato = $"{Var_Candidato}_{Var_Sufijo}";
+            }
+
+            return Var_Candidato;
+        }
     }
+
 }
