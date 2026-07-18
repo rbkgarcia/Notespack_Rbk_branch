@@ -7,9 +7,9 @@ namespace NOTESPACK.Services
 {
     public class AuthService
     {
-        private readonly IDbContextFactory<EventContext> _contextFactory;
+        private readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
 
-        public AuthService(IDbContextFactory<EventContext> contextFactory)
+        public AuthService(IDbContextFactory<ApplicationDbContext> contextFactory)
         {
             _contextFactory = contextFactory;
         }

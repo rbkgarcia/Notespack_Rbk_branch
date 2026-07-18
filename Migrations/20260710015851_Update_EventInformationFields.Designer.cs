@@ -10,7 +10,7 @@ using NOTESPACK.Data;
 
 namespace Notespack.Migrations
 {
-    [DbContext(typeof(EventContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260710015851_Update_EventInformationFields")]
     partial class Update_EventInformationFields
     {
