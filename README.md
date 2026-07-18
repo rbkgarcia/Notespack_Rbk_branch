@@ -1,7 +1,7 @@
 <div align="center">
 
 
-  <img src="Notespack/wwwroot/img/NPlogo.png" alt="logo" width="200" height="auto" />
+  <img src="img/NPlogo.png" alt="logo" width="200" height="auto" />
   <h1>Notespack</h1>
   <p>
   A .NET Blazor web application designed to help college students discover, create, and manage campus and community events in one organized place.
@@ -60,24 +60,54 @@ The application was built using .NET Blazor and SQL Server with a focus on acces
 ## Screenshots
 
 ### Home Page
-Screenshots will be updated as development progresses.
-(image)
+
+<div>
+  <img src="img/screenshots/homepage1.png" alt="Homepage Screenshot 1" width="300">
+</div>
+
+<div>
+  <img src="img/screenshots/homepage2.png" alt="Homepage Screenshot 2" width="300">
+</div>
+
+<div>
+  <img src="img/screenshots/homepage3.png" alt="Homepage Screenshot 3" width="300">
+</div>
+
+### Privacy Page
+
+<div>
+  <img src="img/screenshots/privacy1.png" alt="Privacy Page 1" width="300">
+</div>
+---
+<div>
+  <img src="img/screenshots/privacy2.png" alt="Privacy Page Screenshot 2" width="300">
+</div>
 
 ### Events Page
-Screenshots will be updated as development progresses.
-(image)
+
+<div>
+  <img src="img/screenshots/myevents1.png" alt="My Events Page" width="300">
+</div>
+
+<div>
+  <img src="img/screenshots/campusevents.png" alt="Campus Events Page" width="300">
+</div>
 
 ### Create Event
-Screenshots will be updated as development progresses.
-(image)
 
-### Event Details
-Screenshots will be updated as development progresses.
-(image)
+<div>
+  <img src="img/screenshots/createevent1.png" alt="Create Event Window" width="300">
+</div>
 
 ### Login/Register
-Screenshots will be updated as development progresses.
-(image)
+
+<div>
+  <img src="img/screenshots/createaccount.png" alt="Create Account Window" width="300">
+</div>
+
+<div>
+  <img src="img/screenshots/signin.png" alt="Sign In Window" width="300">
+</div>
 
 
 <!-- TechStack -->
