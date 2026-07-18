@@ -98,8 +98,7 @@ The purpose of this test plan is to verify that the campus events page of Notesp
 * Correct page loads.
 * No broken links or 404 errors.
 
-**Status:** [ ] Pass   [x] Fail
-Privacy Page / Campus Events on Server
+**Status:** [x] Pass   [ ] Fail
 ---
 
 ## TC-CAMPUS-006: Campus event page Content
@@ -126,8 +125,7 @@ Privacy Page / Campus Events on Server
 * Hover effects work.
 * Correct destination reached.
 
-**Status:** [ ] Pass   [x] Fail
-Add to My Events button not working
+**Status:** [x] Pass   [ ] Fail
 ---
 
 ## TC-CAMPUS-008: Images Load
@@ -236,8 +234,7 @@ Navigate using only the Tab key.
 * Interactive elements accessible.
 * Focus indicators visible.
 
-**Status:** [ ] Pass   [x] Fail
-No focus indicator on Featured Happening on Campus
+**Status:** [x] Pass   [ ] Fail
 ---
 
 ## TC-CAMPUS-016: Color Contrast
@@ -340,39 +337,28 @@ No focus indicator on Featured Happening on Campus
 
 # QA Summary Checklist
 
-| Test                  | Pass | Fail |
-| --------------------- |:----:|:----:|
-| Campus event page Loads        | [x]  | [ ]  |
-| Logo Displays         | [x]  | [ ]  |
-| Navigation Bar        | [x]  | [ ]  |
-| Navigation Links      | [ ]  | [x]  |
-| Campus event page Content      | [x]  | [ ]  |
-| Buttons Function      | [ ]  | [x]  |
-| Images Load           | [x]  | [ ]  |
-| Layout                | [x]  | [ ]  |
-| Footer                | [x]  | [ ]  |
-| Desktop View          | [x]  | [ ]  |
-| Tablet View           | [x]  | [ ]  |
-| Mobile View           | [x]  | [ ]  |
-| Keyboard Navigation   | [ ]  | [x]  |
-| Color Contrast        | [x]  | [ ]  |
-| Alt Text              | [x]  | [ ]  |
-| Performance           | [x]  | [ ]  |
-| Browser Compatibility | [x]  | [ ]  |
-| External Links        | [x]  | [ ]  |
-| Spelling and Grammar  | [x]  | [ ]  |
-| Stability             | [x]  | [ ]  |
-
----
-
-# Bug Severity Guidelines
-
-| Severity    | Description                                             |
-| ----------- | ------------------------------------------------------- |
-| 🔴 Critical | Application crashes or major functionality unavailable. |
-| 🟠 High     | Important functionality broken.                         |
-| 🟡 Medium   | Feature works but has noticeable issues.                |
-| 🔵 Low      | Cosmetic issue, typo, or minor UI inconsistency.        |
+| Test                      | Pass | Fail |
+|---------------------------|:----:|:----:|
+| Campus event page Loads   | [x]  | [ ]  |
+| Logo Displays             | [x]  | [ ]  |
+| Navigation Bar            | [x]  | [ ]  |
+| Navigation Links          | [x]  | [ ]  |
+| Campus event page Content | [x]  | [ ]  |
+| Buttons Function          | [x]  | [ ]  |
+| Images Load               | [x]  | [ ]  |
+| Layout                    | [x]  | [ ]  |
+| Footer                    | [x]  | [ ]  |
+| Desktop View              | [x]  | [ ]  |
+| Tablet View               | [x]  | [ ]  |
+| Mobile View               | [x]  | [ ]  |
+| Keyboard Navigation       | [x]  | [ ]  |
+| Color Contrast            | [x]  | [ ]  |
+| Alt Text                  | [x]  | [ ]  |
+| Performance               | [x]  | [ ]  |
+| Browser Compatibility     | [x]  | [ ]  |
+| External Links            | [x]  | [ ]  |
+| Spelling and Grammar      | [x]  | [ ]  |
+| Stability                 | [x]  | [ ]  |
 
 ---
 
@@ -382,7 +368,7 @@ Use the space below to record observations during testing.
 
 **Tester:** Melissa Dickerson
 
-**Date:** 07/17/2026
+**Date:** 07/18/2026
 
 **Version Tested:** Version 1.0
 
