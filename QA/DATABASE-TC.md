@@ -17,12 +17,12 @@ This includes testing:
 # Test Environment
 
 ## Database
-- SQL Server
+- SQLite
 - EF Core Migrations Applied
 - Seed Data (Optional)
 
 ## Tools
-- SQL Server Management Studio (SSMS)
+- SQLite
 - Application UI (for CRUD testing)
 - EF Core logs
 
@@ -47,8 +47,8 @@ This includes testing:
 - No null values for required fields.
 - No constraint violations.
 
-**Status:** [ ] Pass [ ] Fail
-
+**Status:** [ ] Pass [x] Fail
+Can't submit form
 ---
 
 ## TC-DB-002: Event Record Retrieves Correctly
@@ -64,8 +64,8 @@ This includes testing:
 - No mismatched or stale data.
 - No formatting errors.
 
-**Status:** [ ] Pass [ ] Fail
-
+**Status:** [ ] Pass [ ] Fail
+// Can't test
 ---
 
 ## TC-DB-003: Event Update Persists Correctly
@@ -83,7 +83,7 @@ This includes testing:
 - No duplicate records created.
 - UI reflects updated values.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [ ] Pass [ ] Fail
 
 ---
 
@@ -121,7 +121,7 @@ This includes testing:
 - EF Core validation prevents saving.
 - No malformed records appear in the database.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [ ] Pass [ ] Fail
 
 ---
 
@@ -178,7 +178,7 @@ This includes testing:
 - Password stored as a hash (never plain text).
 - No duplicate users.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [ ] Pass [x] Fail
 
 ---
 
@@ -194,7 +194,7 @@ This includes testing:
 - No authentication errors.
 - No incorrect user associations.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [ ] Pass [x] Fail
 
 ---
 

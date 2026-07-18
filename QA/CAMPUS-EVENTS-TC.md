@@ -1,10 +1,10 @@
-# Homepage QA Test Plan
+# Campus Events QA Test Plan
 
 # Notespack
 
 ## Purpose
 
-The purpose of this test plan is to verify that the homepage of Notespack functions correctly, provides a positive user experience, and meets accessibility and responsiveness requirements.
+The purpose of this test plan is to verify that the campus events page of Notespack application functions correctly, provides a positive user experience, and meets accessibility and responsiveness requirements.
 
 ---
 
@@ -25,23 +25,23 @@ The purpose of this test plan is to verify that the homepage of Notespack functi
 
 # Functional Testing
 
-## TC-HOME-001: Homepage Loads Successfully
+## TC-CAMPUS-001: Campus event page Loads Successfully
 
 | Item            | Description                                              |
 | --------------- | -------------------------------------------------------- |
 | Priority        | High                                                     |
 | Preconditions   | Application is running                                   |
-| Steps           | 1. Open the application.<br>2. Navigate to the homepage. |
-| Expected Result | Homepage loads completely without errors.                |
+| Steps           | 1. Open the application.<br>2. Navigate to the Campus event page. |
+| Expected Result | Campus event page loads completely without errors.                |
 | Status          | [x] Pass [ ] Fail                                        |
 
 ---
 
-## TC-HOME-002: Logo Displays
+## TC-CAMPUS-002: Logo Displays
 
 ### Steps
 
-1. Open homepage.
+1. Open Campus event page.
 2. Locate the logo.
 
 ### Expected Result
@@ -54,7 +54,7 @@ The purpose of this test plan is to verify that the homepage of Notespack functi
 
 ---
 
-## TC-HOME-003: Homepage Title Displays
+## TC-CAMPUS-003: Campus event page Title Displays
 
 ### Expected Result
 
@@ -66,7 +66,7 @@ The purpose of this test plan is to verify that the homepage of Notespack functi
 
 ---
 
-## TC-HOME-004: Navigation Bar Displays
+## TC-CAMPUS-004: Navigation Bar Displays
 
 ### Verify
 
@@ -86,7 +86,7 @@ The purpose of this test plan is to verify that the homepage of Notespack functi
 
 ---
 
-## TC-HOME-005: Navigation Links Function
+## TC-CAMPUS-005: Navigation Links Function
 
 ### Steps
 
@@ -99,15 +99,15 @@ The purpose of this test plan is to verify that the homepage of Notespack functi
 * No broken links or 404 errors.
 
 **Status:** [ ] Pass   [x] Fail
-Privacy Page / Campus Events
+Privacy Page / Campus Events on Server
 ---
 
-## TC-HOME-006: Homepage Content
+## TC-CAMPUS-006: Campus event page Content
 
 ### Verify
 
-* Welcome message.
-* Project description.
+* Title
+* Event Cards
 * No placeholder text.
 
 ### Expected Result
@@ -118,7 +118,7 @@ Privacy Page / Campus Events
 
 ---
 
-## TC-HOME-007: Buttons Function Correctly
+## TC-CAMPUS-007: Buttons Function Correctly
 
 ### Verify
 
@@ -127,10 +127,10 @@ Privacy Page / Campus Events
 * Correct destination reached.
 
 **Status:** [ ] Pass   [x] Fail
-Create Account Button at Bottom non functional
+Add to My Events button not working
 ---
 
-## TC-HOME-008: Images Load
+## TC-CAMPUS-008: Images Load
 
 ### Verify
 
@@ -149,7 +149,7 @@ Create Account Button at Bottom non functional
 
 # Layout Testing
 
-## TC-HOME-009: No Overlapping Elements
+## TC-CAMPUS-009: No Overlapping Elements
 
 ### Expected Result
 
@@ -161,7 +161,7 @@ Create Account Button at Bottom non functional
 
 ---
 
-## TC-HOME-010: No Horizontal Scrolling
+## TC-CAMPUS-010: No Horizontal Scrolling
 
 ### Expected Result
 
@@ -172,7 +172,7 @@ Create Account Button at Bottom non functional
 
 ---
 
-## TC-HOME-011: Footer Displays
+## TC-CAMPUS-011: Footer Displays
 
 ### Verify
 
@@ -186,7 +186,7 @@ Create Account Button at Bottom non functional
 
 # Responsive Testing
 
-## TC-HOME-012: Desktop View
+## TC-CAMPUS-012: Desktop View
 
 ### Resolution
 
@@ -200,7 +200,7 @@ Create Account Button at Bottom non functional
 
 ---
 
-## TC-HOME-013: Tablet View
+## TC-CAMPUS-013: Tablet View
 
 ### Expected Result
 
@@ -211,7 +211,7 @@ Create Account Button at Bottom non functional
 
 ---
 
-## TC-HOME-014: Mobile View
+## TC-CAMPUS-014: Mobile View
 
 ### Expected Result
 
@@ -225,7 +225,7 @@ Create Account Button at Bottom non functional
 
 # Accessibility Testing
 
-## TC-HOME-015: Keyboard Navigation
+## TC-CAMPUS-015: Keyboard Navigation
 
 ### Steps
 
@@ -240,7 +240,7 @@ Navigate using only the Tab key.
 No focus indicator on Featured Happening on Campus
 ---
 
-## TC-HOME-016: Color Contrast
+## TC-CAMPUS-016: Color Contrast
 
 ### Expected Result
 
@@ -251,7 +251,7 @@ No focus indicator on Featured Happening on Campus
 
 ---
 
-## TC-HOME-017: Image Alt Text
+## TC-CAMPUS-017: Image Alt Text
 
 ### Expected Result
 
@@ -263,18 +263,18 @@ No focus indicator on Featured Happening on Campus
 
 # Performance Testing
 
-## TC-HOME-018: Homepage Load Speed
+## TC-CAMPUS-018: Campus event page Load Speed
 
 ### Expected Result
 
-* Homepage loads quickly.
+* Campus event page loads quickly.
 * No noticeable lag.
 
 **Status:** [x] Pass   [ ] Fail
 
 ---
 
-## TC-HOME-019: Browser Compatibility
+## TC-CAMPUS-019: Browser Compatibility
 
 ### Test Browsers
 
@@ -284,7 +284,7 @@ No focus indicator on Featured Happening on Campus
 
 ### Expected Result
 
-* Homepage displays consistently across browsers.
+* Campus event page displays consistently across browsers.
 
 **Status:** [x] Pass   [ ] Fail
 
@@ -292,7 +292,7 @@ No focus indicator on Featured Happening on Campus
 
 # Link Validation
 
-## TC-HOME-020: External Links
+## TC-CAMPUS-020: External Links
 
 ### Verify
 
@@ -310,7 +310,7 @@ No focus indicator on Featured Happening on Campus
 
 # Content Validation
 
-## TC-HOME-021: Spelling and Grammar
+## TC-CAMPUS-021: Spelling and Grammar
 
 ### Expected Result
 
@@ -323,15 +323,15 @@ No focus indicator on Featured Happening on Campus
 
 # Stability Testing
 
-## TC-HOME-022: Refresh Stability
+## TC-CAMPUS-022: Refresh Stability
 
 ### Steps
 
-1. Refresh the homepage multiple times.
+1. Refresh the Campus event page multiple times.
 
 ### Expected Result
 
-* Homepage remains functional.
+* Campus event page remains functional.
 * No crashes or rendering issues.
 
 **Status:** [x] Pass   [ ] Fail
@@ -342,11 +342,11 @@ No focus indicator on Featured Happening on Campus
 
 | Test                  | Pass | Fail |
 | --------------------- |:----:|:----:|
-| Homepage Loads        | [x]  | [ ]  |
+| Campus event page Loads        | [x]  | [ ]  |
 | Logo Displays         | [x]  | [ ]  |
 | Navigation Bar        | [x]  | [ ]  |
 | Navigation Links      | [ ]  | [x]  |
-| Homepage Content      | [x]  | [ ]  |
+| Campus event page Content      | [x]  | [ ]  |
 | Buttons Function      | [ ]  | [x]  |
 | Images Load           | [x]  | [ ]  |
 | Layout                | [x]  | [ ]  |
