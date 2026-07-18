@@ -34,7 +34,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 ### Expected Result
 - Events page loads fully without errors.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -56,7 +56,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - No missing or null fields.
 - No broken images.
 
-**Status:** [ ] Pass[ ] Fail
+**Status:** [x] Pass[ ] Fail
 
 ---
 
@@ -76,7 +76,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
     - Location (or “Campus”)
 - No broken images or layout issues.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -92,7 +92,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - CTA button: *“Create your first event”*
 - No duplicate empty-state cards.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -100,11 +100,10 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 
 ### Steps
 1. Click **+ Create New Event** button.
-2. Observe modal behavior.
+2. Observe window behavior.
 
 ### Expected Result
 - Create Event modal appears centered.
-- Background is dimmed.
 - Modal contains all required fields:
     - Title
     - Description
@@ -114,25 +113,25 @@ The purpose of this test plan is to verify that the **Events Page** (including P
     - Address
 - Close button works.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
 ## TC-EVENTS-006: Create Event Form Validation
 
 ### Steps
-1. Open Create Event modal.
+1. Open Create Event window.
 2. Attempt to submit with empty fields.
 3. Enter invalid values (too short title, missing date, etc.).
 
 ### Expected Result
 - Required fields enforce validation.
-- Title enforces minlength = 6, maxlength = 60.
+- Title enforces minlength = 3, maxLength = 60.
 - Description enforces maxlength = 200.
 - Address enforces maxlength = 100.
 - Dates and time must be valid.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -149,7 +148,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - No missing fields.
 - No console errors.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -157,21 +156,21 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 
 ### Steps
 1. Click **Edit Event Details →** on a personal event card.
-2. Observe modal behavior.
+2. Observe window behavior.
 
 ### Expected Result
-- Edit Event modal opens.
+- Edit Event window opens.
 - Fields are pre-filled with correct event data.
 - Close button works.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
 ## TC-EVENTS-009: Edit Event Saves Correctly
 
 ### Steps
-1. Open Edit Event modal.
+1. Open Edit Event window.
 2. Modify at least three fields.
 3. Save changes.
 4. Verify updated event card.
@@ -181,7 +180,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - No stale data.
 - No console errors.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -197,7 +196,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - Event is removed from database.
 - No ghost cards remain.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -211,7 +210,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - 1-column layout on mobile.
 - No overlapping elements.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -221,7 +220,7 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - Page fits screen width.
 - No unintended horizontal scrollbars.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -231,10 +230,10 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 
 ### Expected Result
 - Full grid visible.
-- Modals centered.
+- Windows centered.
 - Text readable.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -243,9 +242,9 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 ### Expected Result
 - Navigation adapts.
 - Event cards resize properly.
-- Modals remain usable.
+- Windows remain usable.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -255,9 +254,9 @@ The purpose of this test plan is to verify that the **Events Page** (including P
 - Single-column layout.
 - Buttons accessible.
 - Text readable.
-- Modals fit screen.
+- Windows fit screen.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -271,9 +270,9 @@ Navigate entire Events page using only **Tab**.
 ### Expected Result
 - All interactive elements reachable.
 - Focus indicators visible.
-- Modals trap focus correctly.
+- Windows trap focus correctly.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -283,7 +282,7 @@ Navigate entire Events page using only **Tab**.
 - Text readable against backgrounds.
 - Date badges and buttons meet WCAG contrast.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -293,7 +292,7 @@ Navigate entire Events page using only **Tab**.
 - All event images have alt text or decorative roles.
 - No missing alt attributes.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -305,7 +304,7 @@ Navigate entire Events page using only **Tab**.
 - Page loads within acceptable time.
 - No lag when rendering multiple cards.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -314,7 +313,7 @@ Navigate entire Events page using only **Tab**.
 ### Expected Result
 - Events page displays consistently across Chrome, Edge, Firefox.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -326,7 +325,7 @@ Navigate entire Events page using only **Tab**.
 - No spelling errors in titles, labels, or descriptions.
 - Consistent formatting.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
@@ -342,46 +341,35 @@ Navigate entire Events page using only **Tab**.
 - No rendering issues.
 - No duplicate elements.
 
-**Status:** [ ] Pass [ ] Fail
+**Status:** [x] Pass [ ] Fail
 
 ---
 
 # QA Summary Checklist
 
-| Test | Pass | Fail |
-|------|:---:|:---:|
-| Events Page Loads | [ ] | [ ] |
-| Personal Events Display | [ ] | [ ] |
-| University Events Display | [ ] | [ ] |
-| Empty State | [ ] | [ ] |
-| Create Modal | [ ] | [ ] |
-| Create Validation | [ ] | [ ] |
-| Create Saves | [ ] | [ ] |
-| Edit Modal | [ ] | [ ] |
-| Edit Saves | [ ] | [ ] |
-| Delete Event | [ ] | [ ] |
-| Layout | [ ] | [ ] |
-| Desktop View | [ ] | [ ] |
-| Tablet View | [ ] | [ ] |
-| Mobile View | [ ] | [ ] |
-| Keyboard Navigation | [ ] | [ ] |
-| Color Contrast | [ ] | [ ] |
-| Alt Text | [ ] | [ ] |
-| Performance | [ ] | [ ] |
-| Browser Compatibility | [ ] | [ ] |
-| Spelling & Grammar | [ ] | [ ] |
-| Stability | [ ] | [ ] |
-
----
-
-# Bug Severity Guidelines
-
-| Severity | Description |
-|---------|-------------|
-| 🔴 Critical | Page unusable or events cannot load. |
-| 🟠 High | CRUD functionality broken. |
-| 🟡 Medium | UI issues affecting usability. |
-| 🔵 Low | Cosmetic issues or minor inconsistencies. |
+| Test                      | Pass | Fail |
+|---------------------------|:----:|:---:|
+| Events Page Loads         | [x]  | [ ] |
+| Personal Events Display   | [x]  | [ ] |
+| University Events Display | [x]  | [ ] |
+| Empty State               | [x]  | [ ] |
+| Create Modal              | [x]  | [ ] |
+| Create Validation         | [x]  | [ ] |
+| Create Saves              | [x]  | [ ] |
+| Edit Modal                | [x]  | [ ] |
+| Edit Saves                | [x]  | [ ] |
+| Delete Event              | [x]  | [ ] |
+| Layout                    | [x]  | [ ] |
+| Desktop View              | [x]  | [ ] |
+| Tablet View               | [x]  | [ ] |
+| Mobile View               | [x]  | [ ] |
+| Keyboard Navigation       | [x]  | [ ] |
+| Color Contrast            | [x]  | [ ] |
+| Alt Text                  | [x]  | [ ] |
+| Performance               | [x]  | [ ] |
+| Browser Compatibility     | [x]  | [ ] |
+| Spelling & Grammar        | [x]  | [ ] |
+| Stability                 | [x]  | [ ] |
 
 ---
 
