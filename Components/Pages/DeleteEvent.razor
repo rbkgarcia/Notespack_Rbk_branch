@@ -5,6 +5,8 @@
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @inject NavigationManager NavigationManager
 
+<h3>Delete Event</h3>
+
 @if (eventToDelete == null)
 {
     <p><em>Loading event...</em></p>
@@ -33,9 +35,7 @@ else
 
                         <div class="event-preview glass-card">
                             <p class="event-info"><strong>Title:</strong> @eventToDelete.Title</p>
-                            <p class="event-info"><strong>Description:</strong> 
-                                 @((MarkupString)eventToDelete.Description)
-                            </p>
+                            <p class="event-info"><strong>Description:</strong> @eventToDelete.Description</p>
                         </div>
 
                         <div class="alert-warning">
@@ -263,7 +263,4 @@ else
     {
         NavigationManager.NavigateTo("/my-events");
     }
-    
-    private MarkupString FormattedDescription => 
-        eventToDelete?.Description != null ? (MarkupString)EventModel.Description : (MarkupString)"";
 }
